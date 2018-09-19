@@ -230,11 +230,27 @@ to represent ASTs.
 1. Virtual functions (virtual)
 2. Polymorphic Visitors (visitor)
 3. Discriminated ASTs (switch)
-4. Generic Visitors (generic)
 
-Only the first three are worth talking about in detail because they're the
-most obvious. The last requires significant programming know-how.
 
-Each approach as pros and cons, which are documented in the various
-subdirectories.
+## Virtual functions
+
+Works well for functions that take only one AST node. Functions taking two
+AST nodes require double dispatch.
+
+The real downside is lack of separation of concerns. AST node classes become
+big since every algorithm requires a new virtual function.
+
+## Polymorphic visitors
+
+Used to separate algorithms from data structures. This works reasonably well,
+but adds a lot of programming overhead. The visitor-based implementation of
+double dispatch is notoriously complex.
+
+## Discriminated hierarchies
+
+Directly supports separation of concerns, most efficient form of dispatch.
+
+Unfortunately, this can be a buggy solution; requires the maintenance of
+node discriminators, which is tedious and error-prone. Downcasts require
+static casts, which can also lead to errors.
 
