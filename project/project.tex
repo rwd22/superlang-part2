@@ -142,7 +142,7 @@ References are created by definitions.
 
 A \emph{function} maps a sequence of input values, called \emph{arguments},
 to an output value, called its \emph{return value}.
-Every function has a type, which determines the arguments that it can accept and as inputs the type of value that it returns as an output.
+Every function has a type, which determines the arguments that it can accept as inputs the type of value that it returns as an output.
 Functions are created by definitions.
 
 \section{Abstract syntax and semantics}
@@ -154,11 +154,16 @@ Note that these are ``strings'' in the abstract sense; they will be represented 
 The meaning of each string is determined by the semantic specifications in this document. 
 The semantic specification determines several properties of the language:
 \begin{itemize}
-\item the static properties associated with a string (or \emph{static semantics});
-\item the dynamic properties associated with a string (or \emph{dynamic semantics});
+\item the \emph{static semantics} of the language define properties of
+strings that can be used at compile-time (e.g., the type of expressions).
+\item the \emph{dynamic semantics} of the language define properties of
+strings that are meaningful at runtime (e.g., the value of expression).
 \end{itemize}
-The static and dynamic semantics of strings constrain the set of strings that could otherwise be formed by simply enumerating valid combinations.
-For example, the expression \code{1 / n} is valid if and only if \code{n} refers to an object of type \code{int} (statically) and the value of that object is never 0 (dynamically).
+Static semantics are often used as an additional ``filter'' on syntactically 
+valid strings that would result in misbehaving programs.
+Dynamic semantics are used to define when the execution of a program is
+defined.
+For example, the expression \code{1 / n} is valid if and only if \code{n} refers to an object of type \code{int} (statically). The evaluation of that expression is defined if the value of that object is never 0 (dynamically).
 
 A \emph{program} is a sequence of definitions (substrings of $d$); that is,
 it is also a string.
