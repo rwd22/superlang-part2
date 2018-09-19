@@ -1,5 +1,86 @@
+# Formal languages
+
+A formal language is defined by a set of strings (of symbols, over an
+alphabet), typically having a set of rules needed to specify which 
+combinations of symbols form valid strings and the meaning of those
+strings.
+
+The rules that specify which strings are valid are typically referred 
+as *syntactic rules*, which govern the basic formation of strings from
+sequences of symbols. The rules that assign meaning to strings are
+the *semantics* of the language. 
+
+Without those rules, however, we are simply left working with uninterpreted
+strings. For example, a language for a simple arithmetic
+calculator might include the following strings:
+
+```
+0
+1
+3 + 4
+x * 2 + (6 - y)
+n / 0
+```
+
+We could try to define the language by enumerating all possible strings,
+but that set is infinite; this doesn't work. Instead, we can enumerate
+patterns or schemas that generate structurally similar strings. If we
+are defining `e` be the set of all strings representing arithmetic
+expressions, then our set might be:
+
+```
+e ::= n        -- the numbers 0, 1, 2, ...
+      e1 + e2  -- addition
+      e1 - e2  -- subtraction
+      e1 * e2  -- multiplication
+      e1 / e2  -- division
+```
+
+Note that we could have written e.g., `e1 + e2` as simply `e + e`. However,
+we use subscripts so that we can refer to each substring as distinct
+entities. Strings that are not self-referential are called *literals* or
+sometimes *terminals*, depending on the usage. 
+
+We will often use parentheses to show appropriate grouping of expressions
+(e.g., `(3 + 2) + 2)` groups `(3 + 2)` as the left hand side of an addition
+and `2` as the right hand side.
+
+This definition lets us generate all strings in the language using a simple 
+algorithm.
+
+1. e_0 the set of all numbers denoted by n
+2. The set e_i is the union of e_i-1 and the set formed by taking non-literal 
+   and substituting all combinations of e_i-1 for references to e. For
+   example, e_1 will include {0, 1, 2, ..., 0 + 0, 0 + 1, 1 + 0, ...}.
+
+There are some nice theoretical properties of this set, but that's outside
+of the scope of this discussion. The remainder of these notes discuss
+implementation strategies and tradeoffs.
+
+The set `e` defines the *abstract syntax* of our language. It defines only
+which strings are in the language, but not specific rules about how those
+strings might be formed. For example, the string lexical string 
+`4 + 5 * 2` can be associated with two elements of `e`:
+
+- `(4 + 5) * 2`
+- `4 + (5 * 2)`
+
+The rules for determining which meaning the lexical string has is not
+a property of the *concrete* syntax of the language. The rules for transforming
+concrete syntax into abstract syntax will be discussed later.
+
 # Abstract syntax trees
 
+Compilers operate on the strings of a language; they apply a lot of different
+analyses those strings in order verify, optimize, and transform them. It
+is not effective to represent programs as sequences of symbols. The analyses
+we want to use require knowledge of the structure of those strings. More
+specifically, we find it easiest to analyze or interpret strings based on
+the syntactic structure, which is conveniently presented the definition
+of our language, `e`. In other words, our aim is to build a data structure
+that captures or encodes that structure, not just the sequence of symbols.
+
+This data structure is called an abstract syntax tree or AST.
 An AST represents strings of a language. For example, the `3 + x` is a
 string in a language; `3` and `x` are also strings. An implementation of 
 an AST for this language would necessarily include data structures that
