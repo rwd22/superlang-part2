@@ -9,8 +9,11 @@ public:
   explicit Value(int n);
   /// Constructs an integer value.
 
-  int get_integer() const;
+  int get_int() const;
   /// Returns the integer value.
+
+  double get_float() const;
+  /// Returns the floating point value.
 
 private:
   int m_value;
@@ -22,7 +25,13 @@ Value::Value(int n)
 { }
 
 inline int
-Value::get_integer() const
+Value::get_int() const
+{
+  return m_value;
+}
+
+inline double
+Value::get_float() const
 {
   return m_value;
 }

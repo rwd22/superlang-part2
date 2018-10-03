@@ -4,94 +4,94 @@
 #include <array>
 #include <vector>
 
-/// A node with a fixed number of operands. The base class B parameter 
-/// specifies the hierarchy.
-template<typename B, int N>
-class Fixed_arity_node : public B
+/// A node with a statically fixed number of operands N. The type T 
+/// specifies the the type of node in the hierarchy.
+template<typename T, int N>
+class Static_arity_node
 {
 public:
-  Fixed_arity_node();
+  Static_arity_node();
   /// Constructs a nullary expression.
   
-  Fixed_arity_node(B* e);
+  Static_arity_node(T* e);
   /// Constructs a unary expression.
   
-  Fixed_arity_node(B* e1, B* e2);
+  Static_arity_node(T* e1, T* e2);
   /// Constructs a binary expression.
 
-  Fixed_arity_node(B* e1, B* e2, B* e3);
+  Static_arity_node(T* e1, T* e2, T* e3);
   /// Constructs a ternary expression.
 
   // Accessors
 
   static constexpr int get_arity() { return N; }
-  /// Returns the artiy of the expression.
+  /// Returns the arity of the expression.
 
-  B* get_operand(int n) const;
+  T* get_child(int n) const;
   /// Returns the nth operand.
 
-  B* get_operand() const;
+  T* get_child() const;
   /// Returns the sole operand. This is valid only when N == 1.
 
   // Iteration
 
-  B** begin() { return m_ops.data(); }
+  T** begin() { return m_ops.data(); }
   /// Returns an iterator pointing to the first operand.
   
-  B** end() { return m_ops.data() + m_ops.size(); }
+  T** end() { return m_ops.data() + m_ops.size(); }
   /// Returns an iterator pointing past the last operand.
 
-  B* const* begin() const { return m_ops.data(); }
+  T* const* begin() const { return m_ops.data(); }
   /// Returns an iterator pointing to the first operand.
   
-  B* const* end() const { return m_ops.data() + m_ops.size(); }
+  T* const* end() const { return m_ops.data() + m_ops.size(); }
   /// Returns an iterator pointing past the last operand.
 
 private:
-  std::array<B*, N> m_ops;
+  std::array<T*, N> m_ops;
 };
 
-template<typename B, int N>
+template<typename T, int N>
 inline
-Fixed_arity_node<B, N>::Fixed_arity_node()
+Static_arity_node<T, N>::Static_arity_node()
   : m_ops()
 {
   assert(N == 0);
 }
 
-template<typename B, int N>
+template<typename T, int N>
 inline
-Fixed_arity_node<B, N>::Fixed_arity_node(B* e)
+Static_arity_node<T, N>::Static_arity_node(T* e)
   : m_ops {e}
 {
   assert(N == 1);
 }
 
-template<typename B, int N>
-inline Fixed_arity_node<B, N>::Fixed_arity_node(B* e1, B* e2)
-  : m_ops{e1, e2}
+template<typename T, int N>
+inline Static_arity_node<T, N>::Static_arity_node(T* e1, T* e2)
+  : m_ops {e1, e2}
 {
   assert(N == 2);
 }
 
-template<typename B, int N>
-inline Fixed_arity_node<B, N>::Fixed_arity_node(B* e1, B* e2, B* e3)
-  : m_ops{e1, e2, e3}
+template<typename T, int N>
+inline Static_arity_node<T, N>::Static_arity_node(T* e1, T* e2, T* e3)
+  : m_ops {e1, e2, e3}
 {
   assert(N == 3);
 }
 
-template<typename B, int N>
-inline B*
-Fixed_arity_node<B, N>::get_operand(int n) const
+template<typename T, int N>
+inline T*
+Static_arity_node<T, N>::get_child(int n) const
 {
   assert(0 <= n && n < N);
   return m_ops[n];
 }
 
-template<typename B, int N>
-inline B*
-Fixed_arity_node<B, N>::get_operand() const
+template<typename T, int N>
+inline T*
+Static_arity_node<T, N>::get_child() const
 {
   static_assert(N == 1);
   return m_ops[0];
@@ -99,48 +99,69 @@ Fixed_arity_node<B, N>::get_operand() const
 
 
 /// An expression with a variable number of operands.
-template<typename B>
-class Variable_arity_node : public B
+///
+/// \todo Supply an allocator so that we can ensure that all memory for
+/// a single tree is allocated from the same pool.
+template<typename T>
+class Dynamic_arity_node
 {
 public:
-  Variable_arity_node(std::initializer_list<B*> list);
-  /// Constructs the node with a list of operators.
+  Dynamic_arity_node(std::initializer_list<T*> list);
+  /// Constructs the node with the children in `list`.
+
+  Dynamic_arity_node(std::vector<T*> const& vec);
+  /// Constructs the node with the children in `vec`.
+
+  Dynamic_arity_node(std::vector<T*>&& vec);
+  /// Constructs the node with the children in `vec`.
 
   // Accessors
 
   int get_arity() const { return m_ops.size(); }
   /// Returns the arity of the expression.
 
-  B* get_operand(int n) const;
+  T* get_child(int n) const;
   /// Returns the nth operand of the node.
 
   // Iteration
 
-  B** begin() { return m_ops.data(); }
+  T** begin() { return m_ops.data(); }
   /// Returns an iterator pointing to the first operand.
   
-  B** end() { return m_ops.data() + m_ops.size(); }
+  T** end() { return m_ops.data() + m_ops.size(); }
   /// Returns an iterator pointing past the last operand.
 
-  B* const* begin() const { return m_ops.data(); }
+  T* const* begin() const { return m_ops.data(); }
   /// Returns an iterator pointing to the first operand.
   
-  B* const* end() const { return m_ops.data() + m_ops.size(); }
+  T* const* end() const { return m_ops.data() + m_ops.size(); }
   /// Returns an iterator pointing past the last operand.
 
 private:
-  std::vector<B*> m_ops;
+  std::vector<T*> m_ops;
 };
 
-template<typename B>
+template<typename T>
 inline
-Variable_arity_node<B>::Variable_arity_node(std::initializer_list<B*> list)
+Dynamic_arity_node<T>::Dynamic_arity_node(std::initializer_list<T*> list)
   : m_ops(list)
 { }
 
-template<typename B>
-inline B*
-Variable_arity_node<B>::get_operand(int n) const
+template<typename T>
+inline
+Dynamic_arity_node<T>::Dynamic_arity_node(std::vector<T*> const& vec)
+  : m_ops(vec)
+{ }
+
+template<typename T>
+inline
+Dynamic_arity_node<T>::Dynamic_arity_node(std::vector<T*>&& vec)
+  : m_ops(std::move(vec))
+{ }
+
+template<typename T>
+inline T*
+Dynamic_arity_node<T>::get_child(int n) const
 {
   return m_ops[n];
 }

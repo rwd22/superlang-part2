@@ -1,168 +1,72 @@
 #include "expr.hpp"
-#include "value.hpp"
+#include "name.hpp"
+#include "type.hpp"
+#include "decl.hpp"
 #include "printer.hpp"
 
 #include <iostream>
 
-void
-Expression::dump() const
+static void
+print_bool(Printer& p, Bool_expr const* e)
 {
-  Printer p(std::cerr);
-  dump(p);
+  if (e->get_bool_value())
+    p.get_stream() << "true";
+  else
+    p.get_stream() << "false";
+}
+
+static void
+print_int(Printer& p, Int_expr const* e)
+{
+  p.get_stream() << e->get_int_value();
+}
+
+static void
+print_float(Printer& p, Float_expr const* e)
+{
+  p.get_stream() << e->get_float_value();
+}
+
+static void
+print_id(Printer& p, Id_expr const* e)
+{
+  p.get_stream() << e->get_declaration()->get_name()->get_string();
 }
 
 void
-Expression::dump_node(Printer& p, char const* name) const
+print(Printer& p, Expr const* e)
 {
-  p.print_indentation();
-  p.get_stream() << name << ' ' << this << '\n';
+  switch (e->get_kind()) {
+  case Expr::bool_lit:
+    return print_bool(p, static_cast<Bool_expr const*>(e));
+  case Expr::int_lit:
+    return print_int(p, static_cast<Int_expr const*>(e));
+  case Expr::float_lit:
+    return print_float(p, static_cast<Float_expr const*>(e));
+  case Expr::id_expr:
+    return print_id(p, static_cast<Id_expr const*>(e));
+  case Expr::add_expr:
+  case Expr::sub_expr:
+  case Expr::mul_expr:
+  case Expr::div_expr:
+  case Expr::rem_expr:
+  case Expr::neg_expr:
+  case Expr::rec_expr:
+  case Expr::eq_expr:
+  case Expr::ne_expr:
+  case Expr::lt_expr:
+  case Expr::gt_expr:
+  case Expr::le_expr:
+  case Expr::ge_expr:
+  case Expr::cond_expr:
+  case Expr::and_expr:
+  case Expr::or_expr:
+  case Expr::not_expr:
+  case Expr::call_expr:
+    break;
+  }
 }
 
-template<typename T>
-void
-dump_nested(Printer& p, T const* node)
-{
-  Print_indented pi(p);
-  for (Expression* e : *node)
-    e->dump(p);
-}
 
-Value
-Boolean_literal::evaluate() const
-{
-  return Value(get_value());
-}
-
-void
-Boolean_literal::dump(Printer& p) const
-{
-  dump_node(p, "Boolean_literal");
-}
-
-Value
-Integer_literal::evaluate() const
-{
-  return Value(get_value());
-}
-
-void
-Integer_literal::dump(Printer& p) const
-{
-  dump_node(p, "Integer_literal");
-}
-
-Value
-Add_expression::evaluate() const
-{
-  Value v1 = get_operand(0)->evaluate();
-  Value v2 = get_operand(1)->evaluate();
-  return Value(v1.get_integer() + v2.get_integer());
-}
-
-void
-Add_expression::dump(Printer& p) const
-{
-  dump_node(p, "Add_expression");
-  dump_nested(p, this);
-}
-
-Value
-Sub_expression::evaluate() const
-{
-  Value v1 = get_operand(0)->evaluate();
-  Value v2 = get_operand(1)->evaluate();
-  return Value(v1.get_integer() - v2.get_integer());
-}
-
-void
-Sub_expression::dump(Printer& p) const
-{
-  dump_node(p, "Sub_expression");
-  dump_nested(p, this);
-}
-
-Value
-Mul_expression::evaluate() const
-{
-  Value v1 = get_operand(0)->evaluate();
-  Value v2 = get_operand(1)->evaluate();
-  return Value(v1.get_integer() * v2.get_integer());
-}
-
-void
-Mul_expression::dump(Printer& p) const
-{
-  dump_node(p, "Mul_expression");
-  dump_nested(p, this);
-}
-
-Value
-Quo_expression::evaluate() const
-{
-  Value v1 = get_operand(0)->evaluate();
-  Value v2 = get_operand(1)->evaluate();
-  return Value(v1.get_integer() / v2.get_integer());
-}
-
-void
-Quo_expression::dump(Printer& p) const
-{
-  dump_node(p, "Quo_expression");
-  dump_nested(p, this);
-}
-
-Value
-Rem_expression::evaluate() const
-{
-  Value v1 = get_operand(0)->evaluate();
-  Value v2 = get_operand(1)->evaluate();
-  return Value(v1.get_integer() % v2.get_integer());
-}
-
-void
-Rem_expression::dump(Printer& p) const
-{
-  dump_node(p, "Rem_expression");
-  dump_nested(p, this);
-}
-
-Value
-Neg_expression::evaluate() const
-{
-  Value v1 = get_operand(0)->evaluate();
-  return Value(0 - v1.get_integer());
-}
-
-void
-Neg_expression::dump(Printer& p) const
-{
-  dump_node(p, "Neg_expression");
-  dump_nested(p, this);
-}
-
-Value
-Rec_expression::evaluate() const
-{
-  Value v1 = get_operand(0)->evaluate();
-  return Value(1 / v1.get_integer());
-}
-
-void
-Rec_expression::dump(Printer& p) const
-{
-  dump_node(p, "Rec_expression");
-  dump_nested(p, this);
-}
-
-Value
-Call_expression::evaluate() const
-{
-  throw std::logic_error("not implemented");
-}
-
-void
-Call_expression::dump(Printer& p) const
-{
-  dump_node(p, "Rec_expression");
-  dump_nested(p, this);
-}
+std::ostream&
+operator<<(std::ostream& os, Expr const& e);
