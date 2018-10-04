@@ -1,30 +1,14 @@
 #include "type.hpp"
-#include "name.hpp"
-#include "stmt.hpp"
-#include "decl.hpp"
-#include "expr.hpp"
-
 
 #include <iostream>
-#include <vector>
-#include <string>
 
 int
 main() {
   Bool_type b;
   Int_type i;
-  Int_type x;
-  Float_type l;
-  std::vector<Type*> v;
-  v.push_back(&i);
-  v.push_back(&b);
-  Name* n;
   Ref_type rb(&b);
   Ref_type ri(&i);
   Ref_type rri(&ri);
-  Fun_type f(v, &i);
-
-
 
   std::cout << b << '\n';
   std::cout << i << '\n';
@@ -56,7 +40,4 @@ main() {
   std::cout << ri << " == " << rb << " -> " << equal(&ri, &rb) << '\n';
   std::cout << ri << " == " << ri << " -> " << equal(&ri, &ri) << '\n';
   std::cout << '\n';
-
-  std::cout << f << '\n';
-  std::cout << l << " == " << l << " -> " << equal(&l, &l) << '\n';
 }
