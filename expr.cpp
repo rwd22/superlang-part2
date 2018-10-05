@@ -19,6 +19,11 @@ print_bool_lit(std::ostream& os, Bool_lit const* e)
   os << "Bool Literal " << e->get_val();
 }
 
+static void
+print_int_lit(std::ostream& os, Int_lit const* e)
+{
+  os << "Int Literal " << e->get_val();
+}
 
 
 
@@ -31,7 +36,7 @@ print(std::ostream& os, Expr const* e)
     return print_bool_lit(os, static_cast<Bool_lit const*>(e));
   
   case Expr::int_lit:
-    return print_str(os, "int literal");
+    return print_int_lit(os, static_cast<Int_lit const*>(e));
 
   /*case Type::float_type:
     return print_str(os, "float");

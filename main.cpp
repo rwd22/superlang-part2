@@ -24,6 +24,9 @@ main() {
   Ref_type rri(&ri);
   Fun_type f(v, &i);
 
+  Bool_lit bl(false);
+  Int_lit il(9);
+
 
 
   std::cout << b << '\n';
@@ -59,4 +62,11 @@ main() {
 
   std::cout << f << '\n';
   std::cout << l << " == " << l << " -> " << equal(&l, &l) << '\n';
+
+
+  std::cout << bl << '\n';
+  std::cout << il << '\n';
+
+
+
 }

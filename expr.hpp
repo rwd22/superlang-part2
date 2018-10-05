@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iosfwd>
 
 
 struct Expr
@@ -8,7 +9,6 @@ struct Expr
 	{
    		bool_lit,
    	 	int_lit,
-   		float_lit,
    	 	id_expr,
    	 	add_expr,
    	 	sub_expr,
@@ -36,98 +36,49 @@ protected:
 public:
   Kind get_kind() const { return m_kind; }
 
-
 private:
   Kind m_kind;
 
-  Type* m_type;
 
 };
 
 
 
-struct Bool_expr : Expr
+struct Bool_lit : Expr
 {
-	Value evaluate() const override 
-	{
-		return Value(value); 
-	}
 
-	bool value;
+public:
+  Bool_lit( bool val )
+    : Expr(bool_lit), m_val(val) 
+  { }
+
+	bool get_val() const { return m_val; }
+
+private:
+
+	bool m_val;
 };
 
-struct Int_expr : Expr
+struct Int_lit : Expr
 {
-	Value evaluate() const override 
-	{
-		return Value(value); 
-	}
-	int value;
+
+public:
+  Int_lit( int val )
+    : Expr(bool_lit), m_val(val) 
+  { }
+
+	int get_val() const { return m_val; }
+
+private:
+
+	int m_val;
 };
 
-struct Float_expr : Exprr
-{
-	Value evaluate() const override 
-	{
-		return Value(value); 
-	}
 
-	float value;
-};
+std::ostream& operator<<(std::ostream& os, Expr const& e);
 
-struct Add_expr : Expr
-{
-	Value evaluate() const override 
-	{
-		Value v1 = e1->evaluate();
-		Value v2 = e2->evaluate();
 
-		if (v1.kind() != v2.kind())
-			throw std::logic_error("oops");
+void print(std::ostream& os, Expr const* e);
 
-		if (v1.kind() == Value::int_val)
-			return v1.get_int() + v2.get_int();
 
-		else if (v1.kind() == Value::float)
-			return Value(v1.get_float() + v2.get_float())
-
-		throw std::logic_error("unknown value");
- 	}
-
-	Expr* expr1;
-	Expr* expr2;
-};
-
-struct Sub_expr : Expr
-{
-	Value evaluate() const override 
-	{
-		Value v1 = e1->evaluate();
-		Value v2 = e2->evaluate();
-
-		if (v1.kind() != v2.kind())
-			throw std::logic_error("Wrong kinds");
-
-		if (v1.kind() == Value::int_val)
-			return v1.get_int() - v2.get_int();
-
-		else if (v1.kind() == Value::float)
-			return Value(v1.get_float() - v2.get_float())
-
-		throw std::logic_error("unknown value");
- 	}
-
-	Expr* expr1;
-	Expr* expr2;
-};
-
-struct Eq_expr : Expr
-{
-	Value evaluate() const override
-	{
-		return e1->evaluate() == e2->evaluate();
-	}
-
-	Expr* expr1;
-	Expr* expr2;
-};
+bool equal(Expr const* e1, Expr const* e2);
