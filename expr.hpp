@@ -2,6 +2,7 @@
 
 #include <iosfwd>
 
+#include "type.hpp"
 
 struct Expr
 {
@@ -48,31 +49,64 @@ struct Bool_lit : Expr
 {
 
 public:
-  Bool_lit( bool val )
-    : Expr(bool_lit), m_val(val) 
+  Bool_lit( bool val, Type* t)
+    : Expr(bool_lit), m_val(val), m_type(t)
   { }
 
 	bool get_val() const { return m_val; }
+	Type* get_type() const { return m_type; }
 
 private:
 
 	bool m_val;
+	Type* m_type;
 };
 
 struct Int_lit : Expr
 {
 
 public:
-  Int_lit( int val )
-    : Expr(bool_lit), m_val(val) 
+  Int_lit( int val, Type* t)
+    : Expr(bool_lit), m_val(val), m_type(t)
   { }
 
 	int get_val() const { return m_val; }
+	Type* get_type() const { return m_type; }
 
 private:
 
 	int m_val;
+	Type * m_type;
 };
+
+struct Add_expr : Expr
+{
+
+public:
+	Add_expr(Expr* e1, Expr* e2)
+		: Expr(add_expr), m_e1(e1), m_e2(e2)
+	{ }
+
+	Expr* get_expr1() const {return m_e1;}
+	Expr* get_expr2() const {return m_e2;}
+
+
+private:
+
+	Expr* m_e1;
+	Expr* m_e2;
+	
+};
+
+
+
+
+
+
+
+
+
+
 
 
 std::ostream& operator<<(std::ostream& os, Expr const& e);
@@ -80,5 +114,4 @@ std::ostream& operator<<(std::ostream& os, Expr const& e);
 
 void print(std::ostream& os, Expr const* e);
 
-
-bool equal(Expr const* e1, Expr const* e2);
+void sexpr(std::ostream& os, Expr const *e);

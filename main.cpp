@@ -24,8 +24,15 @@ main() {
   Ref_type rri(&ri);
   Fun_type f(v, &i);
 
-  Bool_lit bl(false);
-  Int_lit il(9);
+  Type bt = Bool_type();
+  Type it = Int_type();
+
+  Bool_lit bl(false, &bt);
+  Int_lit il(9, &it);
+  Int_lit il2(1, &it);
+
+  Add_expr addex(&il, &il2);
+
 
 
 
@@ -66,6 +73,15 @@ main() {
 
   std::cout << bl << '\n';
   std::cout << il << '\n';
+
+  std::cout << addex << '\n';
+
+  sexpr(std::cout,&addex);
+  std::cout << '\n';
+  sexpr(std::cout,&il);
+  std::cout << '\n';
+  sexpr(std::cout,&bl);
+  std::cout << '\n';
 
 
 
