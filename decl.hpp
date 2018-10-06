@@ -1,9 +1,9 @@
 #pragma once
 
-#include "type.hpp"
-#include "expr.hpp"
-
 #include <iostream>
+
+class Type;
+struct Expr;
 
 struct Decl
 {

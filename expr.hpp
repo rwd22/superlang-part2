@@ -2,8 +2,9 @@
 
 #include <iosfwd>
 
-#include "type.hpp"
-#include "name.hpp"
+
+class Type;
+class Name;
 
 struct Expr
 {

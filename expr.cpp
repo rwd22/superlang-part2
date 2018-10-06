@@ -1,5 +1,6 @@
 #include "expr.hpp"
 #include "name.hpp"
+#include "type.hpp"
 
 #include <iostream>
 #include <iterator>
