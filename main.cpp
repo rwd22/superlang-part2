@@ -170,6 +170,15 @@ main() {
     sexpr(std::cout,&conex);
   std::cout << '\n';
 
+      sexpr(std::cout,&f);
+  std::cout << '\n';
+
+        sexpr(std::cout,&b);
+  std::cout << '\n';
+
+        sexpr(std::cout,&rb);
+  std::cout << '\n';
+
 
 
 

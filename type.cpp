@@ -71,6 +71,93 @@ operator<<(std::ostream& os, Type const& t)
   return os;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static void
+print_str_sexpr(std::ostream& os, char const* str)
+{
+  os << "( " << str << " )";
+}
+
+static void
+print_ref_sexpr(std::ostream& os, Ref_type const* t)
+{
+  os << "( ref " << *t->get_referent_type() << " )";
+}
+
+static void
+print_fun_sexpr(std::ostream& os, Fun_type const* t)
+{
+  if(t->get_param_types().size() == 0 )
+  {
+    os << "(( )" << "-> " << *t->get_ret_type() << " )";
+  }
+  else
+  {
+    os <<"((";
+
+    auto params = t->get_param_types();
+
+    for(int i = 0; i < params.size(); i++)
+    {
+      os << *params[i];
+
+      if (i == params.size()- 1)
+        os << ") ->"<< *t->get_ret_type() << " )";
+      else 
+        os << ",";
+    }
+
+  }
+}
+
+
+void
+sexpr(std::ostream& os, Type const* t)
+{
+  switch (t->get_kind()) {
+  case Type::bool_type:
+    return print_str_sexpr(os, "bool");
+  
+  case Type::int_type:
+    return print_str_sexpr(os, "int");
+
+  case Type::float_type:
+    return print_str_sexpr(os, "float");
+  
+  case Type::ref_type:
+    return print_ref_sexpr(os, static_cast<Ref_type const*>(t));
+
+  case Type::fun_type:
+    return print_fun_sexpr(os, static_cast<Fun_type const*>(t));
+  }
+}
+
 static bool
 equal_ref(Ref_type const* a, Ref_type const* b)
 {
