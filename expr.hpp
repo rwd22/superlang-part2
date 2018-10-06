@@ -416,22 +416,6 @@ private:
 	
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 std::ostream& operator<<(std::ostream& os, Expr const& e);
 
 
