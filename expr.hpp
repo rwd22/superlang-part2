@@ -136,11 +136,11 @@ private:
 	
 };
 
-struct And_Expr : Expr
+struct And_expr : Expr
 {
 
 public:
-	And_Expr(Expr* e1, Expr* e2)
+	And_expr(Expr* e1, Expr* e2)
 		: Expr(and_expr), m_e1(e1), m_e2(e2)
 	{ }
 

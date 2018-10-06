@@ -11,6 +11,7 @@
 
 int
 main() {
+  std::string g = "name";
   Bool_type b;
   Int_type i;
   Int_type x;
@@ -18,7 +19,8 @@ main() {
   std::vector<Type*> v;
   v.push_back(&i);
   v.push_back(&b);
-  Name* n;
+  Name n;
+  n.str = g;
   Ref_type rb(&b);
   Ref_type ri(&i);
   Ref_type rri(&ri);
@@ -32,6 +34,31 @@ main() {
   Int_lit il2(1, &it);
 
   Add_expr addex(&il, &il2);
+  Sub_expr subex(&il, &il2);
+  Mul_expr mulex(&il, &il2);
+  Div_expr divex(&il, &il2);
+  Rem_expr remex(&il, &il2);
+  Gt_expr gtex(&il, &il2);
+  Lt_expr ltex(&il, &il2);
+  Gte_expr gteex(&il, &il2);
+  Lte_expr lteex(&il, &il2);
+  Eq_expr eqex(&il, &il);
+  Ne_expr neex(&il, &il2);
+  And_expr andex(&il, &il2);
+  Or_expr orex(&il, &il2);
+  Neg_expr negex(&il);
+  Rec_expr recex(&il);
+  Not_expr notex(&il);
+  Id_expr idex(&n);
+  Con_expr conex(&eqex, &recex, &addex );
+
+
+
+
+
+
+    Add_expr superex(&addex, &subex);
+
 
 
 
@@ -75,6 +102,27 @@ main() {
   std::cout << il << '\n';
 
   std::cout << addex << '\n';
+  std::cout << subex << '\n';
+  std::cout << mulex << '\n';
+  std::cout << divex << '\n';
+  std::cout << remex << '\n';
+  std::cout << gtex << '\n';
+  std::cout << ltex << '\n';
+  std::cout << gteex << '\n';
+  std::cout << lteex << '\n';
+  std::cout << eqex << '\n';
+  std::cout << neex << '\n';
+  std::cout << andex << '\n';
+  std::cout << orex << '\n';
+  std::cout << negex << '\n';
+  std::cout << recex << '\n';
+  std::cout << notex << '\n';
+  std::cout << superex << '\n';
+
+
+  std::cout << idex << '\n';
+
+    std::cout << conex << '\n';
 
   sexpr(std::cout,&addex);
   std::cout << '\n';
@@ -82,6 +130,54 @@ main() {
   std::cout << '\n';
   sexpr(std::cout,&bl);
   std::cout << '\n';
+    sexpr(std::cout,&subex);
+  std::cout << '\n';
+    sexpr(std::cout,&mulex);
+  std::cout << '\n';
+    sexpr(std::cout,&divex);
+  std::cout << '\n';
+    sexpr(std::cout,&remex);
+  std::cout << '\n';
+    sexpr(std::cout,&gtex);
+  std::cout << '\n';
+    sexpr(std::cout,&ltex);
+  std::cout << '\n';
+    sexpr(std::cout,&gteex);
+  std::cout << '\n';
+    sexpr(std::cout,&lteex);
+  std::cout << '\n';
+    sexpr(std::cout,&eqex);
+  std::cout << '\n';
+    sexpr(std::cout,&neex);
+  std::cout << '\n';
+    sexpr(std::cout,&andex);
+  std::cout << '\n';
+    sexpr(std::cout,&orex);
+  std::cout << '\n';
+    sexpr(std::cout,&negex);
+  std::cout << '\n';
+    sexpr(std::cout,&recex);
+  std::cout << '\n';
+    sexpr(std::cout,&notex);
+  std::cout << '\n';
+    sexpr(std::cout,&superex);
+  std::cout << '\n';
+
+      sexpr(std::cout,&idex);
+  std::cout << '\n';
+
+
+    sexpr(std::cout,&conex);
+  std::cout << '\n';
+
+
+
+
+
+
+
+
+
 
 
 
