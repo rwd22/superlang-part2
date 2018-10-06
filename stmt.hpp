@@ -115,6 +115,19 @@ private:
     Expr* m_expr;
 };
 
+struct Expr_stmt : public Stmt
+{
+public:
+  Expr_stmt(Expr* e)
+    : Stmt(expr_stmt), m_expr(e)
+  { }
+
+  Expr* get_expr() const { return m_expr; }
+
+private:
+    Expr* m_expr;
+};
+
 struct Loc_def_stmt : public Stmt
 {
 public:
@@ -131,7 +144,11 @@ private:
 
 
 
+std::ostream& operator<<(std::ostream& os, Stmt const& s);
 
+
+
+void print(std::ostream& os, Stmt const* s);
 
 
 

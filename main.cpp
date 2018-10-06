@@ -17,6 +17,7 @@ main() {
   Int_type x;
   Float_type l;
   std::vector<Type*> v;
+  std::vector<Stmt*> st;
   v.push_back(&i);
   v.push_back(&b);
   Name n;
@@ -51,6 +52,16 @@ main() {
   Not_expr notex(&il);
   Id_expr idex(&n);
   Con_expr conex(&eqex, &recex, &addex );
+
+  Stmt brs = Break_stmt();
+  Stmt cont = Cont_stmt();
+  While_stmt wstmt(&gteex, &brs);
+  Return_stmt rtstmt(&gteex);
+  Expr_stmt exstmt(&gteex);
+  st.push_back(&wstmt);
+  st.push_back(&rtstmt);
+  Block_stmt blstmt(st);
+  Ternary_stmt terstmt(&gteex, &brs, &cont);
 
 
 
@@ -179,6 +190,20 @@ main() {
         sexpr(std::cout,&rb);
   std::cout << '\n';
 
+
+  std::cout << brs << '\n';
+
+  std::cout << cont << '\n';
+
+  std::cout << wstmt << '\n';
+
+  std::cout << rtstmt << '\n';
+
+    std::cout << exstmt << '\n';
+
+    std::cout << blstmt << '\n';
+
+std::cout << terstmt << '\n';
 
 
 

@@ -4,6 +4,7 @@
 
 class Type;
 struct Expr;
+struct Stmt;
 
 struct Decl
 {
@@ -65,18 +66,22 @@ private:
 struct Func_decl : public Decl
 {
 public:
-  Func_decl(Name* n, Type* t, Expr* e)
-    : Decl(func_decl), m_name(n), m_type(t), m_exp(e)
+  Func_decl(Name* n, Type* t, Expr* e, std::vector<Decl*> decls, Stmt* s)
+    : Decl(func_decl), m_name(n), m_type(t), m_exp(e), m_decls(decls), m_stmt(s)
   { }
 
   Name* get_name() const { return m_name; }
   Type* get_type() const { return m_type; }
   Expr* get_e() const { return m_exp; }
+  std::vector<Decl*> get_decls() const { return m_decls; }
+  Stmt* get_stmt() const { return m_stmt; }
 
 private:
   Type* m_type;
   Expr* m_exp;
   Name* m_name;
+  std::vector<Decl*> m_decls;
+  Stmt* m_stmt;
 };
 
 
@@ -84,7 +89,13 @@ private:
 
 
 
+std::ostream& operator<<(std::ostream& os, Decl const& d);
 
+
+
+void print(std::ostream& os, Decl const* d);
+
+void sexpr(std::ostream& os, Decl const* d);
 
 
 
