@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iterator>
 
+//basic prints
 
 static void
 print_str(std::ostream& os, char const* str)
@@ -133,8 +134,6 @@ print_con(std::ostream& os, Con_expr const* e)
 }
 
 
-
-
 void
 print(std::ostream& os, Expr const* e)
 {
@@ -204,7 +203,7 @@ print(std::ostream& os, Expr const* e)
 
 
 
-
+//operators and functions
 
 
 
@@ -230,8 +229,7 @@ debug_e(std::ostream& os, Expr const& e)
   return os;
 }
 
-
-
+//sexpression prints
 
 static void
 print_bool_sexpr(std::ostream& os, Bool_lit const* e)
@@ -385,12 +383,6 @@ print_con_sexpr(std::ostream& os, Con_expr const* e)
   sexpr_r(os, *e->get_expr3()) << ")";
 }
 
-
-
-
-
-
-
 void
 sexpr(std::ostream& os, Expr const* e)
 {
@@ -458,16 +450,7 @@ sexpr(std::ostream& os, Expr const* e)
   }
 }
 
-
-
-
-
-
-
-
-
-
-
+//debug prints
 
 static void
 print_bool_debug(std::ostream& os, Bool_lit const* e)
@@ -620,11 +603,6 @@ print_con_debug(std::ostream& os, Con_expr const* e)
   debug_e(os, *e->get_expr2()) << " ";
   debug_e(os, *e->get_expr3()) << "))";
 }
-
-
-
-
-
 
 
 void

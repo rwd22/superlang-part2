@@ -28,6 +28,7 @@ private:
   Kind m_kind;
 };
 
+//declaration structures
 
 struct Var_decl : public Decl
 {
@@ -84,7 +85,7 @@ private:
   Stmt* m_stmt;
 };
 
-
+//operators and functions
 
 std::ostream& operator<<(std::ostream& os, Decl const& d);
 

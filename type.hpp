@@ -34,6 +34,7 @@ private:
   Kind m_kind;
 };
 
+//classes for types
 
 class Bool_type : public Type
 {
@@ -60,8 +61,6 @@ public:
   { }
 };
 
-
-
 class Ref_type : public Type
 {
 public:
@@ -86,17 +85,13 @@ class Fun_type : public Type
     std::vector<Type*> get_param_types() const { return m_params; }
     Type* get_ret_type() const { return m_ret_type; }
 
-
-
-
-
   private:
     std::vector<Type*> m_params;
     Type* m_ret_type;
 
 };
 
-
+//operators and functions
 
 std::ostream& operator<<(std::ostream& os, Type const& t);
 
@@ -104,16 +99,8 @@ std::ostream& sexpr_t(std::ostream& os, Type const& t);
 
 std::ostream& debug_t(std::ostream& os, Type const& t);
 
-
-
 void print(std::ostream& os, Type const* t);
 
 void sexpr(std::ostream& os, Type const* t);
 
 void debug(std::ostream& os, Type const* t);
-
-
-bool equal(Type const* a, Type const* b);
-
-
-

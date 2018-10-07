@@ -7,6 +7,8 @@
 #include <iostream>
 #include <iterator>
 
+//basic prints
+
 static void
 print_str(std::ostream& os, char const* str)
 {
@@ -110,14 +112,14 @@ print(std::ostream& os, Stmt const* s)
   }
 }
 
+//operators
+
 std::ostream&
 operator<<(std::ostream& os, Stmt const& s)
 {
   print(os, &s);
   return os;
 }
-
-
 
 std::ostream&
 sexpr_s(std::ostream& os, Stmt const& s)
@@ -133,7 +135,7 @@ debug_s(std::ostream& os, Stmt const& s)
   return os;
 }
 
-
+//sexpression prints
 
 static void
 print_str_sexpr(std::ostream& os, char const* str)
@@ -239,20 +241,7 @@ sexpr(std::ostream& os, Stmt const* s)
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//debug prints
 
 static void
 print_str_debug(std::ostream& os, char const* str)

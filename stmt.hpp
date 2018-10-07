@@ -6,9 +6,6 @@ struct Decl;
 struct Expr;
 class Type;
 
-
-
-
 struct Stmt
 {
 public:
@@ -36,6 +33,7 @@ private:
   Kind m_kind;
 };
 
+//structures for differnt statements
 
 struct Break_stmt : public Stmt
 {
@@ -141,16 +139,15 @@ private:
     Decl* m_decl;
 };
 
-
-
+//operators and functions
 
 std::ostream& operator<<(std::ostream& os, Stmt const& s);
-
-void sexpr(std::ostream& os, Stmt const* s);
 
 std::ostream& sexpr_s(std::ostream& os, Stmt const& s);
 
 std::ostream& debug_s(std::ostream& os, Stmt const& s);
+
+void sexpr(std::ostream& os, Stmt const* s);
 
 void print(std::ostream& os, Stmt const* s);
 

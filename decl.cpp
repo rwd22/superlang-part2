@@ -8,6 +8,7 @@
 #include <iterator>
 
 
+//basic prints
 
 static void
 print_str(std::ostream& os, char const* str)
@@ -53,8 +54,6 @@ print_func(std::ostream& os, Func_decl const* d)
   }
 }
 
-
-
 void
 print(std::ostream& os, Decl const* d)
 {
@@ -70,6 +69,8 @@ print(std::ostream& os, Decl const* d)
 
   }
 }
+
+//operators and functions
 
 std::ostream&
 operator<<(std::ostream& os, Decl const& d)
@@ -92,6 +93,7 @@ debug_d(std::ostream& os, Decl const& d)
   return os;
 }
 
+//sexpression prints
 
 static void
 print_var_sexpr(std::ostream& os, Var_decl const* d)
@@ -133,8 +135,6 @@ print_func_sexpr(std::ostream& os, Func_decl const* d)
   }
 }
 
-
-
 void
 sexpr(std::ostream& os, Decl const* d)
 {
@@ -151,10 +151,7 @@ sexpr(std::ostream& os, Decl const* d)
   }
 }
 
-
-
-
-
+//debug prints
 
 static void
 print_var_debug(std::ostream& os, Var_decl const* d)
@@ -198,8 +195,6 @@ print_func_debug(std::ostream& os, Func_decl const* d)
 
   }
 }
-
-
 
 void
 debug(std::ostream& os, Decl const* d)

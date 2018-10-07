@@ -44,7 +44,7 @@ private:
 
 };
 
-
+//structures for expressions
 
 struct Bool_lit : Expr
 {
@@ -417,13 +417,13 @@ private:
 	
 };
 
+//operators and functions
+
 std::ostream& operator<<(std::ostream& os, Expr const& e);
 
 std::ostream& sexpr_r(std::ostream& os, Expr const& e);
 
 std::ostream& debug_e(std::ostream& os, Expr const& e);
-
-
 
 void print(std::ostream& os, Expr const* e);
 

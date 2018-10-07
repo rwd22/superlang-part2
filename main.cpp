@@ -69,317 +69,377 @@ main() {
 
 
 
+
   Var_decl vd(&n, &bt, &addex);
   Ref_decl rd(&n, &it, &addex);
-      de.push_back(&vd);
+  de.push_back(&vd);
   de.push_back(&rd);
   Func_decl fd(&n, &it, &addex, de, &brs);
 
-    Loc_def_stmt ldstmt(&vd);
+  Loc_def_stmt ldstmt(&vd);
+
+
+  Add_expr superex(&addex, &subex); //an expression made of two add expressions
 
 
 
 
-
-
-    Add_expr superex(&addex, &subex);
-
-
-
-
+  std::cout << "Types" << '\n';
+  std::cout << '\n';
 
   std::cout << b << '\n';
+  std::cout << '\n';
   std::cout << i << '\n';
+  std::cout << '\n';
   std::cout << rb << '\n';
+  std::cout << '\n';
   std::cout << ri << '\n';
-  std::cout << rri << '\n';
   std::cout << '\n';
-
-  std::cout << b << " == " << b << " -> " << equal(&b, &b) << '\n';
-  std::cout << b << " == " << i << " -> " << equal(&b, &i) << '\n';
-  std::cout << b << " == " << rb << " -> " << equal(&b, &rb) << '\n';
-  std::cout << b << " == " << ri << " -> " << equal(&b, &ri) << '\n';
+  std::cout << l << '\n';
   std::cout << '\n';
-
-  std::cout << i << " == " << b << " -> " << equal(&i, &b) << '\n';
-  std::cout << i << " == " << i << " -> " << equal(&i, &i) << '\n';
-  std::cout << i << " == " << rb << " -> " << equal(&i, &rb) << '\n';
-  std::cout << i << " == " << ri << " -> " << equal(&i, &ri) << '\n';
-  std::cout << '\n';
-
-  std::cout << rb << " == " << b << " -> " << equal(&rb, &b) << '\n';
-  std::cout << rb << " == " << i << " -> " << equal(&rb, &i) << '\n';
-  std::cout << rb << " == " << rb << " -> " << equal(&rb, &rb) << '\n';
-  std::cout << rb << " == " << ri << " -> " << equal(&rb, &ri) << '\n';
-  std::cout << '\n';
-
-  std::cout << ri << " == " << b << " -> " << equal(&ri, &b) << '\n';
-  std::cout << ri << " == " << i << " -> " << equal(&ri, &i) << '\n';
-  std::cout << ri << " == " << rb << " -> " << equal(&ri, &rb) << '\n';
-  std::cout << ri << " == " << ri << " -> " << equal(&ri, &ri) << '\n';
-  std::cout << '\n';
-
   std::cout << f << '\n';
-  std::cout << l << " == " << l << " -> " << equal(&l, &l) << '\n';
+  std::cout << '\n';
 
+  sexpr(std::cout,&b);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&i);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&rb);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&ri);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&l);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&f);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  debug(std::cout,&b);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&i);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&rb);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&ri);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&l);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&f);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  std::cout << '\n';
+  std::cout << "Expressions" << '\n';
+  std::cout << '\n';
 
   std::cout << bl << '\n';
+  std::cout << '\n';
   std::cout << il << '\n';
-
+  std::cout << '\n';
   std::cout << addex << '\n';
+  std::cout << '\n';
   std::cout << subex << '\n';
+  std::cout << '\n';
   std::cout << mulex << '\n';
+  std::cout << '\n';
   std::cout << divex << '\n';
+  std::cout << '\n';
   std::cout << remex << '\n';
+  std::cout << '\n';
   std::cout << gtex << '\n';
+  std::cout << '\n';
   std::cout << ltex << '\n';
+  std::cout << '\n';
   std::cout << gteex << '\n';
+  std::cout << '\n';
   std::cout << lteex << '\n';
+  std::cout << '\n';
   std::cout << eqex << '\n';
+  std::cout << '\n';
   std::cout << neex << '\n';
+  std::cout << '\n';
   std::cout << andex << '\n';
+  std::cout << '\n';
   std::cout << orex << '\n';
+  std::cout << '\n';
   std::cout << negex << '\n';
+  std::cout << '\n';
   std::cout << recex << '\n';
+  std::cout << '\n';
   std::cout << notex << '\n';
+  std::cout << '\n';
   std::cout << superex << '\n';
-
-
+  std::cout << '\n';
   std::cout << idex << '\n';
+  std::cout << '\n';
+  std::cout << conex << '\n';
+  std::cout << '\n';
 
-    std::cout << conex << '\n';
-
-  sexpr(std::cout,&addex);
+  sexpr(std::cout,&bl);
+  std::cout << '\n';
   std::cout << '\n';
   sexpr(std::cout,&il);
   std::cout << '\n';
-  sexpr(std::cout,&bl);
   std::cout << '\n';
-    sexpr(std::cout,&subex);
+  sexpr(std::cout,&addex);
   std::cout << '\n';
-    sexpr(std::cout,&mulex);
   std::cout << '\n';
-    sexpr(std::cout,&divex);
+  sexpr(std::cout,&subex);
   std::cout << '\n';
-    sexpr(std::cout,&remex);
   std::cout << '\n';
-    sexpr(std::cout,&gtex);
+  sexpr(std::cout,&mulex);
   std::cout << '\n';
-    sexpr(std::cout,&ltex);
   std::cout << '\n';
-    sexpr(std::cout,&gteex);
+  sexpr(std::cout,&divex);
   std::cout << '\n';
-    sexpr(std::cout,&lteex);
   std::cout << '\n';
-    sexpr(std::cout,&eqex);
+  sexpr(std::cout,&remex);
   std::cout << '\n';
-    sexpr(std::cout,&neex);
   std::cout << '\n';
-    sexpr(std::cout,&andex);
+  sexpr(std::cout,&gtex);
   std::cout << '\n';
-    sexpr(std::cout,&orex);
   std::cout << '\n';
-    sexpr(std::cout,&negex);
+  sexpr(std::cout,&ltex);
   std::cout << '\n';
-    sexpr(std::cout,&recex);
   std::cout << '\n';
-    sexpr(std::cout,&notex);
+  sexpr(std::cout,&gteex);
   std::cout << '\n';
-    sexpr(std::cout,&superex);
   std::cout << '\n';
-
-      sexpr(std::cout,&idex);
+  sexpr(std::cout,&lteex);
   std::cout << '\n';
-
-
-    sexpr(std::cout,&conex);
   std::cout << '\n';
-
-      sexpr(std::cout,&f);
+  sexpr(std::cout,&eqex);
   std::cout << '\n';
-
-        sexpr(std::cout,&b);
   std::cout << '\n';
-
-        sexpr(std::cout,&rb);
+  sexpr(std::cout,&neex);
   std::cout << '\n';
-
-
-  std::cout << brs << '\n';
-
-  std::cout << cont << '\n';
-
-  std::cout << wstmt << '\n';
-
-  std::cout << rtstmt << '\n';
-
-    std::cout << exstmt << '\n';
-
-    std::cout << blstmt << '\n';
-
-std::cout << terstmt << '\n';
-
-std::cout << vd << '\n';
-
-std::cout << rd << '\n';
-
-std::cout << fd << '\n';
-
-std::cout << ldstmt << '\n';
-
-      sexpr(std::cout,&vd);
+  std::cout << '\n';
+  sexpr(std::cout,&andex);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&orex);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&negex);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&recex);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&notex);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&superex);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&idex);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&conex);
+  std::cout << '\n';
   std::cout << '\n';
 
-        sexpr(std::cout,&fd);
+  debug(std::cout,&bl);
   std::cout << '\n';
-
-        sexpr(std::cout,&rd);
   std::cout << '\n';
-
-          sexpr(std::cout,&brs);
+  debug(std::cout,&il);
   std::cout << '\n';
-
-            sexpr(std::cout,&cont);
   std::cout << '\n';
-
-              sexpr(std::cout,&blstmt);
+  debug(std::cout,&addex);
   std::cout << '\n';
-
-                sexpr(std::cout,&wstmt);
   std::cout << '\n';
-
-                sexpr(std::cout,&terstmt);
-  std::cout << '\n';
-
-                sexpr(std::cout,&rtstmt);
-  std::cout << '\n';
-
-                sexpr(std::cout,&exstmt);
-  std::cout << '\n';
-
-                sexpr(std::cout,&ldstmt);
-  std::cout << '\n';
-
-                debug(std::cout,&rb);
-  std::cout << '\n';
-
-                  debug(std::cout,&f);
-  std::cout << '\n';
-
-                    debug(std::cout,&b);
-  std::cout << '\n';
-
-                   debug(std::cout,&i);
-  std::cout << '\n';
-
-                   debug(std::cout,&l);
-  std::cout << '\n';
-
-                     debug(std::cout,&bl);
-  std::cout << '\n';
-
-                       debug(std::cout,&il);
-  std::cout << '\n';
-
-                         debug(std::cout,&addex);
-  std::cout << '\n';
-
   debug(std::cout,&subex);
   std::cout << '\n';
-
+  std::cout << '\n';
   debug(std::cout,&mulex);
   std::cout << '\n';
-
+  std::cout << '\n';
   debug(std::cout,&divex);
   std::cout << '\n';
-
+  std::cout << '\n';
   debug(std::cout,&remex);
   std::cout << '\n';
-
-    debug(std::cout,&gtex);
+  std::cout << '\n';
+  debug(std::cout,&gtex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&ltex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&gteex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&lteex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&eqex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&neex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&andex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&orex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&negex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&recex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&notex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&superex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&idex);
+  std::cout << '\n';
+  std::cout << '\n';
+  debug(std::cout,&conex);
+  std::cout << '\n';
   std::cout << '\n';
 
-    debug(std::cout,&ltex);
+ 
+  std::cout << '\n';
+  std::cout << "Declarations" << '\n';
   std::cout << '\n';
 
-    debug(std::cout,&lteex);
+  std::cout << vd << '\n';
+  std::cout << '\n';
+  std::cout << rd << '\n';
+  std::cout << '\n';
+  std::cout << fd << '\n';
   std::cout << '\n';
 
-    debug(std::cout,&gteex);
+  sexpr(std::cout,&vd);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&rd);
+  std::cout << '\n';
+  std::cout << '\n';
+  sexpr(std::cout,&fd);
+  std::cout << '\n';
   std::cout << '\n';
 
-      debug(std::cout,&eqex);
+  debug(std::cout,&vd);
   std::cout << '\n';
-
-      debug(std::cout,&neex);
   std::cout << '\n';
-
-        debug(std::cout,&andex);
+  debug(std::cout,&rd);
   std::cout << '\n';
-        debug(std::cout,&orex);
   std::cout << '\n';
-
-        debug(std::cout,&negex);
+  debug(std::cout,&fd);
   std::cout << '\n';
-
-          debug(std::cout,&idex);
-  std::cout << '\n';
-
-          debug(std::cout,&recex);
-  std::cout << '\n';
-
-          debug(std::cout,&notex);
-  std::cout << '\n';
-
-          debug(std::cout,&conex);
-  std::cout << '\n';
-
-
-          debug(std::cout,&superex);
-  std::cout << '\n';
-
-            debug(std::cout,&rd);
-  std::cout << '\n';
-
-            debug(std::cout,&vd);
-  std::cout << '\n';
-
-            debug(std::cout,&fd);
-  std::cout << '\n';
-
-
-
-
-debug(std::cout,&brs);
-  std::cout << '\n';
-
-            debug(std::cout,&cont);
-  std::cout << '\n';
-
-              debug(std::cout,&blstmt);
-  std::cout << '\n';
-
-                debug(std::cout,&wstmt);
-  std::cout << '\n';
-
-                debug(std::cout,&terstmt);
-  std::cout << '\n';
-
-                debug(std::cout,&rtstmt);
-  std::cout << '\n';
-
-                debug(std::cout,&exstmt);
-  std::cout << '\n';
-
-                debug(std::cout,&ldstmt);
   std::cout << '\n';
 
 
+  std::cout << '\n';
+  std::cout << "Statements" << '\n';
+  std::cout << '\n';
+  
+
+  std::cout << brs << '\n';
+  std::cout << '\n';
+
+  std::cout << cont << '\n';
+  std::cout << '\n';
+
+  std::cout << wstmt << '\n';
+  std::cout << '\n';
+
+  std::cout << rtstmt << '\n';
+  std::cout << '\n';
+
+  std::cout << exstmt << '\n';
+  std::cout << '\n';
+
+  std::cout << blstmt << '\n';
+  std::cout << '\n';
+
+  std::cout << terstmt << '\n';
+  std::cout << '\n';
+
+  std::cout << ldstmt << '\n';
+  std::cout << '\n';
 
 
 
+  sexpr(std::cout,&brs);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  sexpr(std::cout,&cont);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  sexpr(std::cout,&blstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  sexpr(std::cout,&wstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  sexpr(std::cout,&terstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  sexpr(std::cout,&rtstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  sexpr(std::cout,&exstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  sexpr(std::cout,&ldstmt);
+  std::cout << '\n';
+  std::cout << '\n';
 
 
+  debug(std::cout,&brs);
+  std::cout << '\n';
+  std::cout << '\n';
 
+  debug(std::cout,&cont);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  debug(std::cout,&blstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  debug(std::cout,&wstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  debug(std::cout,&terstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  debug(std::cout,&rtstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  debug(std::cout,&exstmt);
+  std::cout << '\n';
+  std::cout << '\n';
+
+  debug(std::cout,&ldstmt);
+  std::cout << '\n';
+  std::cout << '\n';
 
 }

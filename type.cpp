@@ -4,6 +4,8 @@
 #include <iostream>
 #include <iterator>
 
+//basic prints
+
 static void
 print_str(std::ostream& os, char const* str)
 {
@@ -64,6 +66,8 @@ print(std::ostream& os, Type const* t)
   }
 }
 
+//operators and functions
+
 std::ostream&
 operator<<(std::ostream& os, Type const& t)
 {
@@ -84,6 +88,8 @@ debug_t(std::ostream& os, Type const& t)
   debug(os, &t);
   return os;
 }
+
+//sexpression prints
 
 
 static void
@@ -147,85 +153,7 @@ sexpr(std::ostream& os, Type const* t)
   }
 }
 
-static bool
-equal_ref(Ref_type const* a, Ref_type const* b)
-{
-  return equal(a->get_referent_type(), b->get_referent_type());
-}
-
-static bool
-equal_fun(Fun_type const* a, Fun_type const* b)
-{
-  if(a->get_ret_type() == b->get_ret_type())
-  {
-    auto paramsOne = a->get_param_types();
-    auto paramsTwo = b->get_param_types();
-
-    if(paramsOne.size() != paramsTwo.size())
-    {
-      return false;
-    }
-
-    for (int i = 0; i < paramsOne.size(); ++i)
-    {
-      if(paramsOne[i] != paramsTwo[i] )
-      {
-        return false;
-      }
-    }
-
-
-
-    return true;
-  }
-  else
-  {
-    return false;
-  }
-}
-
-
-bool
-equal(Type const* a, Type const* b)
-{
-  // Different kinds of types are not equal.
-  if (a->get_kind() != b->get_kind())
-    return false;
-
-  // Compare similar types.
-  switch (a->get_kind()) {
-  case Type::bool_type:
-    return true;
-  
-  case Type::int_type:
-    return true;
-  
-  case Type::float_type:
-    return true;
-
-  case Type::ref_type:
-    return equal_ref(static_cast<Ref_type const*>(a), 
-                     static_cast<Ref_type const*>(b));
-  case Type::fun_type:
-    return equal_fun(static_cast<Fun_type const*>(a), 
-                     static_cast<Fun_type const*>(b));
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//debug prints
 
 static void
 print_ref_debug(std::ostream& os, Ref_type const* t)
@@ -276,12 +204,6 @@ print_fun_debug(std::ostream& os, Fun_type const* t)
 
   }
 }
-
-
-
-
-
-
 
 void
 debug(std::ostream& os, Type const* t)
