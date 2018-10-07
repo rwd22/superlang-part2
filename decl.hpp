@@ -90,6 +90,10 @@ std::ostream& operator<<(std::ostream& os, Decl const& d);
 
 std::ostream& sexpr_d(std::ostream& os, Decl const& d);
 
+std::ostream& debug_d(std::ostream& os, Decl const& d);
+
 void print(std::ostream& os, Decl const* d);
+
+void debug(std::ostream& os, Decl const* d);
 
 void sexpr(std::ostream& os, Decl const* d);

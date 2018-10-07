@@ -335,6 +335,18 @@ std::cout << ldstmt << '\n';
   std::cout << '\n';
 
 
+          debug(std::cout,&superex);
+  std::cout << '\n';
+
+            debug(std::cout,&rd);
+  std::cout << '\n';
+
+            debug(std::cout,&vd);
+  std::cout << '\n';
+
+            debug(std::cout,&fd);
+  std::cout << '\n';
+
 
 
 

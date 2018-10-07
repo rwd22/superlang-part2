@@ -85,6 +85,13 @@ sexpr_d(std::ostream& os, Decl const& d)
   return os;
 }
 
+std::ostream&
+debug_d(std::ostream& os, Decl const& d)
+{
+  debug(os, &d);
+  return os;
+}
+
 
 static void
 print_var_sexpr(std::ostream& os, Var_decl const* d)
@@ -140,6 +147,69 @@ sexpr(std::ostream& os, Decl const* d)
 
   case Decl::func_decl:
     return print_func_sexpr(os, static_cast<Func_decl const*>(d));
+
+  }
+}
+
+
+
+
+
+
+static void
+print_var_debug(std::ostream& os, Var_decl const* d)
+{
+  os << "(Var: (" << *d->get_name()<< " : " << *d->get_type() << d << " = ";
+  debug_e(os, *d->get_e()) << " ))";
+}
+
+static void
+print_ref_debug(std::ostream& os, Ref_decl const* d)
+{
+  os << "(Ref: (" << *d->get_name()<< " : " << *d->get_type() << d << " = ";
+  debug_e(os, *d->get_e()) << " ))";
+}
+
+static void
+print_func_debug(std::ostream& os, Func_decl const* d)
+{
+  if(d->get_decls().size() == 0 )
+  {
+    os << "(Func: (" << *d->get_name() << "(( )" << "-> " << *d->get_type() << " " << *d->get_stmt() << d << ")";
+  }
+  else
+  {
+    os << "(Func: (" << *d->get_name() <<"((";
+
+    auto decls = d->get_decls();
+
+    for(int i = 0; i < decls.size(); i++)
+    {
+      os << *decls[i];
+
+      if (i == decls.size()- 1)
+        os << ") ->"<< *d->get_type() << " " << *d->get_stmt() << d << ")";
+      else 
+        os << ",";
+    }
+
+  }
+}
+
+
+
+void
+debug(std::ostream& os, Decl const* d)
+{
+  switch (d->get_kind()) {
+  case Decl::var_decl:
+    return print_var_debug(os, static_cast<Var_decl const*>(d));
+
+  case Decl::ref_decl:
+    return print_ref_debug(os, static_cast<Ref_decl const*>(d));
+
+  case Decl::func_decl:
+    return print_func_debug(os, static_cast<Func_decl const*>(d));
 
   }
 }
