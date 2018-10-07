@@ -100,6 +100,8 @@ class Fun_type : public Type
 
 std::ostream& operator<<(std::ostream& os, Type const& t);
 
+std::ostream& sexpr_t(std::ostream& os, Type const& t);
+
 
 
 void print(std::ostream& os, Type const* t);

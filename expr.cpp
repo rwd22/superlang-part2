@@ -6,8 +6,6 @@
 #include <iterator>
 
 
-
-
 static void
 print_str(std::ostream& os, char const* str)
 {

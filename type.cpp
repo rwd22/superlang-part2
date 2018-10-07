@@ -71,31 +71,12 @@ operator<<(std::ostream& os, Type const& t)
   return os;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+std::ostream&
+sexpr_t(std::ostream& os, Type const& t)
+{
+  sexpr(os, &t);
+  return os;
+}
 
 
 static void
@@ -107,7 +88,8 @@ print_str_sexpr(std::ostream& os, char const* str)
 static void
 print_ref_sexpr(std::ostream& os, Ref_type const* t)
 {
-  os << "( ref " << *t->get_referent_type() << " )";
+  os << "( ref ";
+  sexpr_t(os, *t->get_referent_type()) << " )";
 }
 
 static void
