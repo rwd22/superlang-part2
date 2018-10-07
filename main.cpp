@@ -236,8 +236,6 @@ std::cout << ldstmt << '\n';
         sexpr(std::cout,&rd);
   std::cout << '\n';
 
-          sexpr(std::cout,&f);
-  std::cout << '\n';
 
 
 

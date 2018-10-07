@@ -226,9 +226,6 @@ sexpr_r(std::ostream& os, Expr const& e)
 }
 
 
-//adjust all sexpressions to use sexpr_r in get_expr situations
-
-
 
 
 static void

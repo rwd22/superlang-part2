@@ -78,17 +78,26 @@ operator<<(std::ostream& os, Decl const& d)
   return os;
 }
 
+std::ostream&
+sexpr_d(std::ostream& os, Decl const& d)
+{
+  sexpr(os, &d);
+  return os;
+}
+
 
 static void
 print_var_sexpr(std::ostream& os, Var_decl const* d)
 {
-  os << "(( " << *d->get_name()<< " : " << *d->get_type() << " = "<< *d->get_e() << " ))";
+  os << "(( " << *d->get_name()<< " : " << *d->get_type() << " = ";
+  sexpr_r(os, *d->get_e()) << " ))";
 }
 
 static void
 print_ref_sexpr(std::ostream& os, Ref_decl const* d)
 {
-  os << "(( " << *d->get_name()<< " : " << *d->get_type() << " = "<< *d->get_e() << " ))";
+  os << "(( " << *d->get_name()<< " : " << *d->get_type() << " = ";
+  sexpr_r(os, *d->get_e()) << " ))";
 }
 
 static void

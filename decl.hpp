@@ -91,6 +91,8 @@ private:
 
 std::ostream& operator<<(std::ostream& os, Decl const& d);
 
+std::ostream& sexpr_d(std::ostream& os, Decl const& d);
+
 
 
 void print(std::ostream& os, Decl const* d);
