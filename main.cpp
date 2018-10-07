@@ -12,6 +12,7 @@
 void Whiletest();
 void LargeTest();
 void FunctTest();
+void FunctTestTwo();
 
 int
 main() {
@@ -449,6 +450,9 @@ main() {
   std::cout << '\n';
   std::cout << '\n';
   FunctTest();
+  std::cout << '\n';
+  std::cout << '\n';
+  FunctTestTwo();
 
 
 }
@@ -530,7 +534,7 @@ void FunctTest()//creates a function that says if 1 > 2 then subtract 1 from 20 
 
   Var_decl v1(&a, &i, &x);
   Var_decl v2(&b, &i, &y);
-  Var_decl v3(&b, &i, &z);
+  Var_decl v3(&c, &i, &z);
 
   std::vector<Decl*> de;
 
@@ -547,26 +551,61 @@ void FunctTest()//creates a function that says if 1 > 2 then subtract 1 from 20 
   Expr_stmt last(&other);
 
 
-
   Ternary_stmt cond(&greater, &first, &last);
-
-
-
-
 
 
   Func_decl subber(&n, &i, de, &cond);
 
-
-
   std::cout << subber << '\n';
-
-
-
-
-
 }
 
+
+void FunctTestTwo()//creates a function that says if x AND y then set z as true otherwise set z as false.
+{
+
+  Name a;
+  a.str = "One";
+  Name b;
+  b.str = "Two";
+  Name c;
+  c.str = "Three";
+
+   Name n;
+  n.str = "Function Second";
+
+  Bool_type bl;
+
+  Bool_lit x(true, &bl);
+  Bool_lit y(false, &bl);
+  Bool_lit z(false, &bl);
+
+
+  Var_decl v1(&a, &bl, &x);
+  Var_decl v2(&b, &bl, &y);
+  Var_decl v3(&c, &bl, &z);
+
+  std::vector<Decl*> de;
+
+  de.push_back(&v1);
+  de.push_back(&v2);
+  de.push_back(&v3);
+
+  And_expr andexpr(&x, &y);
+
+  Eq_expr outcome1(&z, &x);
+  Expr_stmt first(&outcome1);
+
+  Eq_expr outcome2(&z, &y);
+  Expr_stmt last(&outcome2);
+
+
+  Ternary_stmt cond(&andexpr, &first, &last);
+
+
+  Func_decl checker(&n, &bl, de, &cond);
+
+  std::cout << checker << '\n';
+}
 
 
 
