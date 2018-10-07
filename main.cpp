@@ -9,6 +9,10 @@
 #include <vector>
 #include <string>
 
+void Whiletest();
+void LargeTest();
+void FunctTest();
+
 int
 main() {
   std::string g = "name";
@@ -66,15 +70,11 @@ main() {
   Block_stmt blstmt(st);
   Ternary_stmt terstmt(&gteex, &brs, &cont);
 
-
-
-
-
   Var_decl vd(&n, &bt, &addex);
   Ref_decl rd(&n, &it, &addex);
   de.push_back(&vd);
   de.push_back(&rd);
-  Func_decl fd(&n, &it, &addex, de, &brs);
+  Func_decl fd(&n, &it, de, &brs);
 
   Loc_def_stmt ldstmt(&vd);
 
@@ -442,4 +442,144 @@ main() {
   std::cout << '\n';
   std::cout << '\n';
 
+  Whiletest();
+  std::cout << '\n';
+  std::cout << '\n';
+  LargeTest();
+  std::cout << '\n';
+  std::cout << '\n';
+  FunctTest();
+
+
 }
+
+
+void Whiletest() //generates a while statement and prints it in its various forms
+{
+  Int_type it;
+
+  Int_lit x(1, &it);
+  Int_lit y(4, &it);
+
+  Gt_expr greater(&x, &y);
+
+  Stmt brk = Break_stmt();
+
+  While_stmt whtst(&greater, &brk);
+
+
+
+  std::cout << whtst <<'\n';
+
+  debug(std::cout,&whtst);
+  std::cout << '\n';
+
+  sexpr(std::cout,&whtst);
+  std::cout << '\n';
+
+}
+
+void LargeTest() //generates a large add expression made up of other expressions and prints it in its forms
+{
+  Int_type it;
+
+  Int_lit x(1, &it);
+  Int_lit y(4, &it);
+  Int_lit z(16, &it);
+
+  Mul_expr mul(&x, &y);
+
+  Add_expr add1(&x, &y);
+
+  Add_expr add2(&x, &z);
+
+  Add_expr add3(&mul, &add1);
+
+  Add_expr add4(&add3, &add2);
+
+  std::cout << add4 <<'\n';
+
+  debug(std::cout,&add4);
+  std::cout << '\n';
+
+  sexpr(std::cout,&add4);
+  std::cout << '\n';
+
+}
+
+
+void FunctTest()//creates a function that says if 1 > 2 then subtract 1 from 20 otherwise subtract 4 from 20.
+{
+
+  Name a;
+  a.str = "One";
+  Name b;
+  b.str = "Two";
+  Name c;
+  c.str = "Three";
+
+   Name n;
+  n.str = "Function";
+
+  Int_type i;
+
+  Int_lit x(1, &i);
+  Int_lit y(4, &i);
+  Int_lit z(20, &i);
+
+
+  Var_decl v1(&a, &i, &x);
+  Var_decl v2(&b, &i, &y);
+  Var_decl v3(&b, &i, &z);
+
+  std::vector<Decl*> de;
+
+  de.push_back(&v1);
+  de.push_back(&v2);
+  de.push_back(&v3);
+
+  Gt_expr greater(&x, &y);
+
+  Sub_expr minus(&z, &x);
+  Expr_stmt first(&minus);
+
+  Sub_expr other(&z, &y);
+  Expr_stmt last(&other);
+
+
+
+  Ternary_stmt cond(&greater, &first, &last);
+
+
+
+
+
+
+  Func_decl subber(&n, &i, de, &cond);
+
+
+
+  std::cout << subber << '\n';
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
