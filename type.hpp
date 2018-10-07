@@ -102,11 +102,15 @@ std::ostream& operator<<(std::ostream& os, Type const& t);
 
 std::ostream& sexpr_t(std::ostream& os, Type const& t);
 
+std::ostream& debug_t(std::ostream& os, Type const& t);
+
 
 
 void print(std::ostream& os, Type const* t);
 
 void sexpr(std::ostream& os, Type const* t);
+
+void debug(std::ostream& os, Type const* t);
 
 
 bool equal(Type const* a, Type const* b);

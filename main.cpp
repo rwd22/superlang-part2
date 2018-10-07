@@ -260,6 +260,21 @@ std::cout << ldstmt << '\n';
                 sexpr(std::cout,&ldstmt);
   std::cout << '\n';
 
+                debug(std::cout,&rb);
+  std::cout << '\n';
+
+                  debug(std::cout,&f);
+  std::cout << '\n';
+
+                    debug(std::cout,&b);
+  std::cout << '\n';
+
+                   debug(std::cout,&i);
+  std::cout << '\n';
+
+                   debug(std::cout,&l);
+  std::cout << '\n';
+
 
 
 
