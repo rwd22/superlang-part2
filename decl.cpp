@@ -15,7 +15,7 @@ print_str(std::ostream& os, char const* str)
   os << str;
 }
 
-/*static void
+static void
 print_var(std::ostream& os, Var_decl const* d)
 {
   os << "( " << *d->get_name()<< " : " << *d->get_type() << " = "<< *d->get_e() << " )";
@@ -38,7 +38,7 @@ print_func(std::ostream& os, Func_decl const* d)
   {
     os << *d->get_name() <<"(";
 
-    auto decls = t->get_decls();
+    auto decls = d->get_decls();
 
     for(int i = 0; i < decls.size(); i++)
     {
@@ -51,22 +51,21 @@ print_func(std::ostream& os, Func_decl const* d)
     }
 
   }
-}*/
+}
 
 
 
-
-/*void
+void
 print(std::ostream& os, Decl const* d)
 {
   switch (d->get_kind()) {
-  case Expr::var_decl:
+  case Decl::var_decl:
     return print_var(os, static_cast<Var_decl const*>(d));
 
-  case Expr::ref_decl:
+  case Decl::ref_decl:
     return print_ref(os, static_cast<Ref_decl const*>(d));
 
-  case Expr::func_decl:
+  case Decl::func_decl:
     return print_func(os, static_cast<Func_decl const*>(d));
   
  /* case Expr::int_lit:
@@ -76,14 +75,14 @@ print(std::ostream& os, Decl const* d)
     return print_add(os, static_cast<Add_expr const*>(e));
 
   case Expr::sub_expr:
-    return print_sub(os, static_cast<Sub_expr const*>(e));//////////////////
+    return print_sub(os, static_cast<Sub_expr const*>(e));*/
   }
-}*/
+}
 
 std::ostream&
 operator<<(std::ostream& os, Decl const& d)
 {
-  //print(os, &d);
+  print(os, &d);
   return os;
 }
 

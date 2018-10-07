@@ -18,6 +18,7 @@ main() {
   Float_type l;
   std::vector<Type*> v;
   std::vector<Stmt*> st;
+  std::vector<Decl*> de;
   v.push_back(&i);
   v.push_back(&b);
   Name n;
@@ -62,6 +63,17 @@ main() {
   st.push_back(&rtstmt);
   Block_stmt blstmt(st);
   Ternary_stmt terstmt(&gteex, &brs, &cont);
+
+
+
+
+  Var_decl vd(&n, &bt, &addex);
+  Ref_decl rd(&n, &it, &addex);
+      de.push_back(&vd);
+  de.push_back(&rd);
+  Func_decl fd(&n, &it, &addex, de, &brs);
+
+    Loc_def_stmt ldstmt(&vd);
 
 
 
@@ -204,6 +216,14 @@ main() {
     std::cout << blstmt << '\n';
 
 std::cout << terstmt << '\n';
+
+std::cout << vd << '\n';
+
+std::cout << rd << '\n';
+
+std::cout << fd << '\n';
+
+std::cout << ldstmt << '\n';
 
 
 
