@@ -615,10 +615,10 @@ print_id_debug(std::ostream& os, Id_expr const* e)
 static void
 print_con_debug(std::ostream& os, Con_expr const* e)
 {
-  os << "(Conditional: " ;
+  os << "(Conditional: " << e << "(" ;
   debug_e(os, *e->get_expr1()) << " ";
   debug_e(os, *e->get_expr2()) << " ";
-  debug_e(os, *e->get_expr3()) << ")";
+  debug_e(os, *e->get_expr3()) << "))";
 }
 
 

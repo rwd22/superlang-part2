@@ -350,7 +350,29 @@ std::cout << ldstmt << '\n';
 
 
 
+debug(std::cout,&brs);
+  std::cout << '\n';
 
+            debug(std::cout,&cont);
+  std::cout << '\n';
+
+              debug(std::cout,&blstmt);
+  std::cout << '\n';
+
+                debug(std::cout,&wstmt);
+  std::cout << '\n';
+
+                debug(std::cout,&terstmt);
+  std::cout << '\n';
+
+                debug(std::cout,&rtstmt);
+  std::cout << '\n';
+
+                debug(std::cout,&exstmt);
+  std::cout << '\n';
+
+                debug(std::cout,&ldstmt);
+  std::cout << '\n';
 
 
 

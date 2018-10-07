@@ -150,4 +150,8 @@ void sexpr(std::ostream& os, Stmt const* s);
 
 std::ostream& sexpr_s(std::ostream& os, Stmt const& s);
 
+std::ostream& debug_s(std::ostream& os, Stmt const& s);
+
 void print(std::ostream& os, Stmt const* s);
+
+void debug(std::ostream& os, Stmt const* s);
