@@ -115,11 +115,11 @@ print_fun_sexpr(std::ostream& os, Fun_type const* t)
 {
   if(t->get_param_types().size() == 0 )
   {
-    os << "(( )" << "-> " << *t->get_ret_type() << " )";
+    os  << "-> " << "(( )"  << *t->get_ret_type() << " )";
   }
   else
   {
-    os <<"((";
+    os <<"(->(";
 
     auto params = t->get_param_types();
 
@@ -128,7 +128,7 @@ print_fun_sexpr(std::ostream& os, Fun_type const* t)
       os << *params[i];
 
       if (i == params.size()- 1)
-        os << ") ->"<< *t->get_ret_type() << " )";
+        os << ") "<< *t->get_ret_type() << " )";
       else 
         os << ",";
     }

@@ -218,10 +218,15 @@ operator<<(std::ostream& os, Expr const& e)
   return os;
 }
 
+std::ostream&
+sexpr_r(std::ostream& os, Expr const& e)
+{
+  sexpr(os, &e);
+  return os;
+}
 
 
-
-
+//adjust all sexpressions to use sexpr_r in get_expr situations
 
 
 
@@ -241,97 +246,126 @@ print_int_sexpr(std::ostream& os, Int_lit const* e)
 static void
 print_add_sexpr(std::ostream& os, Add_expr const* e)
 {
-  os << "(" << "+ "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "+ ";
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2()) << ")";
 }
 
 static void
 print_sub_sexpr(std::ostream& os, Sub_expr const* e)
 {
-  os << "(" << "- "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "- "; 
+  sexpr_r(os, *e->get_expr1()) << " " ;
+   sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_mul_sexpr(std::ostream& os, Mul_expr const* e)
 {
-  os << "(" << "* "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "* ";
+   sexpr_r(os, *e->get_expr1()) << " " ;
+   sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_div_sexpr(std::ostream& os, Div_expr const* e)
 {
-  os << "(" << "div "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "div "; 
+  sexpr_r(os, *e->get_expr1()) << " " ;
+  sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_rem_sexpr(std::ostream& os, Rem_expr const* e)
 {
-  os << "(" << "rem "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "rem ";
+   sexpr_r(os, *e->get_expr1()) << " ";
+    sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_gt_sexpr(std::ostream& os, Gt_expr const* e)
 {
-  os << "(" << "> "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "> ";
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_lt_sexpr(std::ostream& os, Lt_expr const* e)
 {
-  os << "(" << "< "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "< ";
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_gte_sexpr(std::ostream& os, Gte_expr const* e)
 {
-  os << "(" << ">= "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << ">= "; 
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_lte_sexpr(std::ostream& os, Lte_expr const* e)
 {
-  os << "(" << "<= "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "<= ";
+ sexpr_r(os, *e->get_expr1()) << " " ;
+ sexpr_r(os, *e->get_expr2()) << ")";
 }
 
 static void
 print_eq_sexpr(std::ostream& os, Eq_expr const* e)
 {
-  os << "(" << "= "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "= ";
+  sexpr_r(os, *e->get_expr1()) << " " ;
+  sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_ne_sexpr(std::ostream& os, Ne_expr const* e)
 {
-  os << "(" << "!= "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "!= ";
+  sexpr_r(os, *e->get_expr1()) << " " ;
+  sexpr_r(os, *e->get_expr2()) << ")";
 }
 
 static void
 print_and_sexpr(std::ostream& os, And_expr const* e)
 {
-  os << "(" << "AND "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "AND ";
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2())  << ")";
 }
 
 static void
 print_or_sexpr(std::ostream& os, Or_expr const* e)
 {
-  os << "(" << "OR "<< *e->get_expr1() << " " << *e->get_expr2() << ")";
+  os << "(" << "OR ";
+  sexpr_r(os, *e->get_expr1()) << " " ;
+  sexpr_r(os, *e->get_expr2()) << ")";
 }
 
 static void
 print_neg_sexpr(std::ostream& os, Neg_expr const* e)
 {
-  os << "(" <<  "-" << *e->get_expr1() << ")";
+  os << "(" <<  "-";
+  sexpr_r(os, *e->get_expr1()) << ")";
 }
 
 static void
 print_rec_sexpr(std::ostream& os, Rec_expr const* e)
 {
-  os << "(" << "/" << *e->get_expr1() << ")";
+  os << "(" << "/";
+  sexpr_r(os, *e->get_expr1()) << ")";
 }
 
 static void
 print_not_sexpr(std::ostream& os, Not_expr const* e)
 {
-  os << "(" << "NOT " << *e->get_expr1() << ")";
+  os << "(" << "NOT ";
+  sexpr_r(os, *e->get_expr1()) << ")";
 }
 
 static void
@@ -343,7 +377,10 @@ print_id_sexpr(std::ostream& os, Id_expr const* e)
 static void
 print_con_sexpr(std::ostream& os, Con_expr const* e)
 {
-  os << "(Con " << *e->get_expr1() << " " << *e->get_expr2()<< " " << *e->get_expr3() << ")";
+  os << "(Con " ;
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2()) << " ";
+  sexpr_r(os, *e->get_expr3()) << ")";
 }
 
 

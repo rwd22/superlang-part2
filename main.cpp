@@ -20,11 +20,13 @@ main() {
   std::vector<Stmt*> st;
   std::vector<Decl*> de;
   v.push_back(&i);
-  v.push_back(&b);
+
+
   Name n;
   n.str = g;
   Ref_type rb(&b);
   Ref_type ri(&i);
+    v.push_back(&ri);
   Ref_type rri(&ri);
   Fun_type f(v, &i);
 
@@ -224,6 +226,18 @@ std::cout << rd << '\n';
 std::cout << fd << '\n';
 
 std::cout << ldstmt << '\n';
+
+      sexpr(std::cout,&vd);
+  std::cout << '\n';
+
+        sexpr(std::cout,&fd);
+  std::cout << '\n';
+
+        sexpr(std::cout,&rd);
+  std::cout << '\n';
+
+          sexpr(std::cout,&f);
+  std::cout << '\n';
 
 
 
