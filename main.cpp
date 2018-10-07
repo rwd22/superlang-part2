@@ -284,6 +284,58 @@ std::cout << ldstmt << '\n';
                          debug(std::cout,&addex);
   std::cout << '\n';
 
+  debug(std::cout,&subex);
+  std::cout << '\n';
+
+  debug(std::cout,&mulex);
+  std::cout << '\n';
+
+  debug(std::cout,&divex);
+  std::cout << '\n';
+
+  debug(std::cout,&remex);
+  std::cout << '\n';
+
+    debug(std::cout,&gtex);
+  std::cout << '\n';
+
+    debug(std::cout,&ltex);
+  std::cout << '\n';
+
+    debug(std::cout,&lteex);
+  std::cout << '\n';
+
+    debug(std::cout,&gteex);
+  std::cout << '\n';
+
+      debug(std::cout,&eqex);
+  std::cout << '\n';
+
+      debug(std::cout,&neex);
+  std::cout << '\n';
+
+        debug(std::cout,&andex);
+  std::cout << '\n';
+        debug(std::cout,&orex);
+  std::cout << '\n';
+
+        debug(std::cout,&negex);
+  std::cout << '\n';
+
+          debug(std::cout,&idex);
+  std::cout << '\n';
+
+          debug(std::cout,&recex);
+  std::cout << '\n';
+
+          debug(std::cout,&notex);
+  std::cout << '\n';
+
+          debug(std::cout,&conex);
+  std::cout << '\n';
+
+
+
 
 
 
