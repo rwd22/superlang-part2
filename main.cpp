@@ -275,6 +275,15 @@ std::cout << ldstmt << '\n';
                    debug(std::cout,&l);
   std::cout << '\n';
 
+                     debug(std::cout,&bl);
+  std::cout << '\n';
+
+                       debug(std::cout,&il);
+  std::cout << '\n';
+
+                         debug(std::cout,&addex);
+  std::cout << '\n';
+
 
 
 

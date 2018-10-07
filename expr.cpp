@@ -223,6 +223,13 @@ sexpr_r(std::ostream& os, Expr const& e)
   return os;
 }
 
+std::ostream&
+debug_e(std::ostream& os, Expr const& e)
+{
+  debug(os, &e);
+  return os;
+}
+
 
 
 
@@ -450,3 +457,240 @@ sexpr(std::ostream& os, Expr const* e)
 
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+static void
+print_bool_debug(std::ostream& os, Bool_lit const* e)
+{
+  os << "(" << *e->get_type() << " " << e << ")";
+}
+
+static void
+print_int_debug(std::ostream& os, Int_lit const* e)
+{
+  os << "(" << *e->get_type() << " " << e << ")";
+}
+
+static void
+print_add_debug(std::ostream& os, Add_expr const* e)
+{
+  os << "(Add: " << e << " (";
+  debug_e(os, *e->get_expr1()) << " + ";
+  debug_e(os, *e->get_expr2()) << "))";
+}
+
+static void
+print_sub_debug(std::ostream& os, Sub_expr const* e)
+{
+  os << "(" << "- "; 
+  sexpr_r(os, *e->get_expr1()) << " " ;
+   sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_mul_debug(std::ostream& os, Mul_expr const* e)
+{
+  os << "(" << "* ";
+   sexpr_r(os, *e->get_expr1()) << " " ;
+   sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_div_debug(std::ostream& os, Div_expr const* e)
+{
+  os << "(" << "div "; 
+  sexpr_r(os, *e->get_expr1()) << " " ;
+  sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_rem_debug(std::ostream& os, Rem_expr const* e)
+{
+  os << "(" << "rem ";
+   sexpr_r(os, *e->get_expr1()) << " ";
+    sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_gt_debug(std::ostream& os, Gt_expr const* e)
+{
+  os << "(" << "> ";
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_lt_debug(std::ostream& os, Lt_expr const* e)
+{
+  os << "(" << "< ";
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_gte_debug(std::ostream& os, Gte_expr const* e)
+{
+  os << "(" << ">= "; 
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_lte_debug(std::ostream& os, Lte_expr const* e)
+{
+  os << "(" << "<= ";
+ sexpr_r(os, *e->get_expr1()) << " " ;
+ sexpr_r(os, *e->get_expr2()) << ")";
+}
+
+static void
+print_eq_debug(std::ostream& os, Eq_expr const* e)
+{
+  os << "(" << "= ";
+  sexpr_r(os, *e->get_expr1()) << " " ;
+  sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_ne_debug(std::ostream& os, Ne_expr const* e)
+{
+  os << "(" << "!= ";
+  sexpr_r(os, *e->get_expr1()) << " " ;
+  sexpr_r(os, *e->get_expr2()) << ")";
+}
+
+static void
+print_and_debug(std::ostream& os, And_expr const* e)
+{
+  os << "(" << "AND ";
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2())  << ")";
+}
+
+static void
+print_or_debug(std::ostream& os, Or_expr const* e)
+{
+  os << "(" << "OR ";
+  sexpr_r(os, *e->get_expr1()) << " " ;
+  sexpr_r(os, *e->get_expr2()) << ")";
+}
+
+static void
+print_neg_debug(std::ostream& os, Neg_expr const* e)
+{
+  os << "(" <<  "-";
+  sexpr_r(os, *e->get_expr1()) << ")";
+}
+
+static void
+print_rec_debug(std::ostream& os, Rec_expr const* e)
+{
+  os << "(" << "/";
+  sexpr_r(os, *e->get_expr1()) << ")";
+}
+
+static void
+print_not_debug(std::ostream& os, Not_expr const* e)
+{
+  os << "(" << "NOT ";
+  sexpr_r(os, *e->get_expr1()) << ")";
+}
+
+static void
+print_id_debug(std::ostream& os, Id_expr const* e)
+{
+  os << "("  << *e->get_id() << ")";
+}
+
+static void
+print_con_debug(std::ostream& os, Con_expr const* e)
+{
+  os << "(Con " ;
+  sexpr_r(os, *e->get_expr1()) << " ";
+  sexpr_r(os, *e->get_expr2()) << " ";
+  sexpr_r(os, *e->get_expr3()) << ")";
+}
+
+
+
+
+
+
+
+void
+debug(std::ostream& os, Expr const* e)
+{
+  switch (e->get_kind()) {
+  case Expr::bool_lit:
+    return print_bool_debug(os, static_cast<Bool_lit const*>(e));
+  
+  case Expr::int_lit:
+    return print_int_debug(os, static_cast<Int_lit const*>(e));
+
+  case Expr::add_expr:
+    return print_add_debug(os, static_cast<Add_expr const*>(e));
+
+  case Expr::sub_expr:
+    return print_sub_debug(os, static_cast<Sub_expr const*>(e));
+
+  case Expr::mul_expr:
+    return print_mul_debug(os, static_cast<Mul_expr const*>(e));
+
+  case Expr::div_expr:
+    return print_div_debug(os, static_cast<Div_expr const*>(e));
+
+  case Expr::rem_expr:
+    return print_rem_debug(os, static_cast<Rem_expr const*>(e));
+
+  case Expr::gt_expr:
+    return print_gt_debug(os, static_cast<Gt_expr const*>(e));
+
+  case Expr::lt_expr:
+    return print_lt_debug(os, static_cast<Lt_expr const*>(e));
+
+  case Expr::gte_expr:
+    return print_gte_debug(os, static_cast<Gte_expr const*>(e));
+
+  case Expr::lte_expr:
+    return print_lte_debug(os, static_cast<Lte_expr const*>(e));
+
+  case Expr::eq_expr:
+    return print_eq_debug(os, static_cast<Eq_expr const*>(e));
+
+  case Expr::ne_expr:
+    return print_ne_debug(os, static_cast<Ne_expr const*>(e));
+
+  case Expr::and_expr:
+    return print_and_debug(os, static_cast<And_expr const*>(e));
+
+  case Expr::or_expr:
+    return print_or_debug(os, static_cast<Or_expr const*>(e));
+
+  case Expr::neg_expr:
+    return print_neg_debug(os, static_cast<Neg_expr const*>(e));
+
+  case Expr::rec_expr:
+    return print_rec_debug(os, static_cast<Rec_expr const*>(e));
+
+  case Expr::not_expr:
+    return print_not_debug(os, static_cast<Not_expr const*>(e));
+
+  case Expr::id_expr:
+    return print_id_debug(os, static_cast<Id_expr const*>(e));
+
+  case Expr::con_expr:
+    return print_con_debug(os, static_cast<Con_expr const*>(e));
+
+  }
+}
+

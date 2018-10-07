@@ -421,8 +421,12 @@ std::ostream& operator<<(std::ostream& os, Expr const& e);
 
 std::ostream& sexpr_r(std::ostream& os, Expr const& e);
 
+std::ostream& debug_e(std::ostream& os, Expr const& e);
+
 
 
 void print(std::ostream& os, Expr const* e);
+
+void debug(std::ostream& os,Expr const* e);
 
 void sexpr(std::ostream& os, Expr const *e);
